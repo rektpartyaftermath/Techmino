@@ -244,6 +244,10 @@ then
     MES.new('error',"An error occured during loading, and some data was lost.")
 end
 
+
+require'CCloader'
+
+
 --Initialize fields, sequence, missions, gameEnv for cutsom game
 local fieldData=loadFile('conf/customBoards','-string -canSkip')
 if fieldData then
