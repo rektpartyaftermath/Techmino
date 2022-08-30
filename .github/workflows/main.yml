@@ -144,7 +144,7 @@ jobs:
       - name: Process ColdClear
         shell: bash
         run: |
-          for arch in *
+          for arch in ./ColdClear/*
           do  pushd $arch >/dev/null
               mv libCCloader.so CCloader.so
               popd >/dev/null
