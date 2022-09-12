@@ -136,23 +136,17 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ env.CORE_LOVE_ARTIFACT_NAME }}
-      - name: Download ColdClear
-        uses: ./.github/actions/get-cc
+      - name: clone ColdClear
+        uses: actions/checkout@v3
         with:
-          platform: Android
-          dir: ./ColdClear
-          tag: android-merge-2
-      - name: Process ColdClear
-        shell: bash
-        run: |
-          for arch in ./ColdClear/*
-          do  pushd $arch >/dev/null
-              mv libCCloader.so CCloader.so
-              popd >/dev/null
-          done
+          repository: 26F-Studio/cold_clear_ai_love2d_wrapper
+          ref: ci-android-merge
+          submodules: recursive
+          path: ./libs/CCloader
+          clean: false
       - name: Build Android packages
         id: build-packages
-        uses: 26F-Studio/love-actions-android@v1
+        uses: 26F-Studio/love-actions-android@eebf8d1968c5c316f633110c30faa35d0068c8f0
         with:
           app-name: ${{ needs.get-info.outputs.app-name }}
           bundle-id: ${{ steps.process-app-name.outputs.bundle-id }}
@@ -163,7 +157,7 @@ jobs:
           keystore-store-password: ${{ secrets.ANDROID_KEYSTORE_STOREPASSWORD }}
           love-package: ${{ env.CORE_LOVE_PACKAGE_PATH }}
           resource-path: ./.github/build/android/${{ env.BUILD_TYPE }}/res
-          libs-path: ./ColdClear/
+          libs-path: ./libs/
           product-name: ${{ steps.process-app-name.outputs.product-name }}
           version-string: ${{ needs.get-info.outputs.version-string }}
           version-code: ${{ needs.get-info.outputs.version-code }}
