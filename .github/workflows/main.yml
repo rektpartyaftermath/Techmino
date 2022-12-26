@@ -385,7 +385,7 @@ jobs:
           mv ./ColdClear/x64/CCloader.so ./lib/lua/5.1
       - name: Download solution finder
         run: |
-          curl -L https://github.com/26F-Studio/sfinder-lua-port/releases/download/v0.3/Linux.tar.xz -o Linux.tar.xz
+          curl -L https://github.com/26F-Studio/sfinder-lua-port/releases/download/v0.4/Linux.tar.xz -o Linux.tar.xz
           tar -xvf Linux.tar.xz
           rm Linux.tar.xz
           mv sfinder.so lib/lua/5.1
