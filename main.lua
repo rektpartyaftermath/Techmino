@@ -642,3 +642,30 @@ if TABLE.find(arg,'-- test') then
         love.event.quit(1)
     end)
 end
+
+-- test solution finder
+-- should be removed in release
+local sfinder = require 'sfinder'
+if TABLE.find(arg, '--sfinder') then
+    print(sfinder.start_jvm(arg[TABLE.find(arg, '--sfinder')+1]))
+    -- should print nothing if success
+
+    local X = true
+    local _ = false
+
+    for _, pair in ipairs(sfinder.percent(4, true, {
+        X, _, X, _, _, _, X, _, X, X,
+        X, _, X, _, _, _, _, _, X, X,
+        X, _, _, _, _, _, _, _, X, _,
+        X, _, _, _, _, _, _, _, _, _,
+    }, {'LTSZIOJ'}, -1, 'softdrop', 'srs')) do
+        print('pieces: '..table.concat(pair[1], ' '))
+        print('can pc: '..tostring(pair[2]))
+    end
+    -- should print
+    -- pieces: L T S Z I O J
+    -- can pc: true
+
+    print(sfinder.destroy_jvm())
+    -- should print nothing if success
+end

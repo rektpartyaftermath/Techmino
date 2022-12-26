@@ -381,9 +381,16 @@ jobs:
       - name: Process ColdClear
         shell: bash
         run: |
-          cd ./ColdClear
           mkdir -p ./lib/lua/5.1
-          mv ./x64/CCloader.so ./lib/lua/5.1
+          mv ./ColdClear/x64/CCloader.so ./lib/lua/5.1
+      - name: Download solution finder
+        run: |
+          curl -L https://github.com/26F-Studio/sfinder-lua-port/releases/download/v0.3/Linux.tar.xz -o Linux.tar.xz
+          tar -xvf Linux.tar.xz
+          rm Linux.tar.xz
+          mv sfinder.so lib/lua/5.1
+          mkdir -p lib/jvm
+          mv jre lib/jvm
       - name: Build Linux packages
         id: build-packages
         uses: love-actions/love-actions-linux@v1
@@ -394,7 +401,7 @@ jobs:
           version-string: ${{ needs.get-info.outputs.version-string }}
           icon-path: ./.github/build/linux/${{ env.BUILD_TYPE }}/icon.png
           love-package: ${{ env.CORE_LOVE_PACKAGE_PATH }}
-          lib-path: ./ColdClear/lib
+          lib-path: ./lib
           product-name: ${{ steps.process-app-name.outputs.product-name }}
           output-folder: ${{ env.OUTPUT_FOLDER }}
       - name: Upload AppImage artifact
