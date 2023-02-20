@@ -801,6 +801,18 @@ function Player:solid(x,y)
     if y>#self.field then
         return false
     end
+    if not self.field[y] then
+        print(self.uid)
+        print(#self.field)
+        error("ERR!!!!!!!!!!!!!!!")
+    elseif #self.field[y]<10 then
+        print(self.uid)
+        print(#self.field[y])
+        for i=1,10 do
+            print(self.field[y][i])
+        end
+        error("ERR!!!!!!!!!!!!!!!")
+    end
     return self.field[y]
     [x]>0-- to catch bug (nil[*])
 end
