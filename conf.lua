@@ -33,7 +33,7 @@ function love.conf(t)
     M.video,M.audio,M.sound=true,true,true
     M.graphics,M.font,M.image=true,true,true
     M.mouse,M.touch,M.keyboard,M.joystick=true,true,true,true
-    M.physics=false
+    M.physics=true
 
     local W=t.window
     W.vsync=0 -- Unlimited FPS
@@ -51,8 +51,8 @@ function love.conf(t)
         W.minwidth,W.minheight=640,360
     -- end
     -- W.borderless=true -- Display window frame
-    W.resizable=false -- Whether window is resizable
     W.fullscreen=true -- Fullscreen type
+    W.resizable=false -- Whether window is resizable
     W.title="Techmino "..require "version".string -- Window title
     if fs.getInfo('media/image/icon.png') then
         W.icon='media/image/icon.png'
