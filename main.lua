@@ -3263,19 +3263,3 @@ end
 function love.resize()
 	create_world()
 end
-
--- function love.conf(t)
--- 	t.title = "L\195\150VE " .. love._version .. " (" .. love._version_codename .. ")"
--- 	-- t.gammacorrect = true
--- 	-- t.modules.audio = false
--- 	-- t.modules.sound = false
--- 	-- t.modules.joystick = false
--- 	-- t.window.resizable = true
--- 	-- t.window.highdpi = true
--- 	t.window.width, t.window.height = 1280, 720
--- 	t.window.fullscreen = true
--- 	t.window.resizeable = false
--- 	-- if love._os == "iOS" then
--- 	-- 	t.window.borderless = true
--- 	-- end
--- end
